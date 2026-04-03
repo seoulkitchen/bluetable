@@ -29,10 +29,11 @@
     min-height: 100vh;
   }
 
+  /* Header */
   header {
     background-color: var(--dark);
     color: var(--cream);
-    padding: 2.5rem 2rem 2rem;
+    padding: 2.5rem 2rem 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -60,6 +61,68 @@
 
   header p { font-size: 0.85rem; opacity: 0.55; letter-spacing: 0.1em; }
 
+  /* Nav */
+  .nav {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.5);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-btn:hover { color: var(--cream); }
+  .nav-btn.active { color: var(--cream); border-bottom-color: var(--accent); }
+
+  /* About section */
+  .about-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+  }
+
+  .about-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.97rem;
+    line-height: 2.1;
+    color: var(--dark);
+    font-weight: 300;
+    white-space: pre-wrap;
+  }
+
+  .about-text .highlight {
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .about-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 2.5rem 0;
+    opacity: 0.6;
+  }
+
+  .about-sign {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Filter area */
   .filter-wrap {
     background: var(--warm);
     padding: 1.2rem 2rem;
@@ -131,18 +194,14 @@
   }
 
   .filter-btn:hover { background: rgba(107,79,58,0.1); }
-
-  .filter-btn.active {
-    background: var(--brown);
-    color: var(--cream);
-    border-color: var(--brown);
-  }
+  .filter-btn.active { background: var(--brown); color: var(--cream); border-color: var(--brown); }
 
   .filter-btn[data-season="봄"].active { background: var(--spring); border-color: var(--spring); color: var(--dark); }
   .filter-btn[data-season="여름"].active { background: var(--summer); border-color: var(--summer); color: var(--dark); }
   .filter-btn[data-season="가을"].active { background: var(--autumn); border-color: var(--autumn); color: var(--cream); }
   .filter-btn[data-season="겨울"].active { background: var(--winter); border-color: var(--winter); color: var(--dark); }
 
+  /* Timeline */
   .timeline-wrap {
     background: var(--warm);
     border-bottom: 1px solid rgba(107,79,58,0.15);
@@ -151,11 +210,7 @@
 
   .timeline-inner { max-width: 720px; margin: 0 auto; }
 
-  .slider-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .slider-row { display: flex; align-items: center; gap: 0.75rem; }
 
   .year-display {
     font-family: 'Playfair Display', serif;
@@ -182,6 +237,7 @@
     cursor: pointer;
   }
 
+  /* Stats */
   .stats-bar {
     max-width: 720px;
     margin: 0 auto;
@@ -190,6 +246,7 @@
     color: var(--muted);
   }
 
+  /* Cards */
   .cards-wrap {
     max-width: 720px;
     margin: 0 auto;
@@ -220,12 +277,7 @@
     flex-wrap: wrap;
   }
 
-  .season-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
+  .season-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
   .season-dot.봄 { background: var(--spring); }
   .season-dot.여름 { background: var(--summer); }
   .season-dot.가을 { background: var(--autumn); }
@@ -276,8 +328,17 @@
     border: 1px solid rgba(107,79,58,0.2);
     border-radius: 10px;
     color: var(--brown);
+    cursor: pointer;
+    transition: all 0.15s;
   }
 
+  .keyword-tag:hover {
+    background: var(--brown);
+    color: var(--cream);
+    border-color: var(--brown);
+  }
+
+  /* Modal */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -396,6 +457,10 @@
     font-size: 0.9rem;
     line-height: 2;
   }
+
+  /* Page sections */
+  .page { display: none; }
+  .page.active { display: block; }
 </style>
 </head>
 <body>
@@ -406,58 +471,82 @@
   <p>bluetable · 일상의 기록</p>
 </header>
 
-<div class="filter-wrap">
-  <div class="filter-inner">
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPage('archive', this)">글 모음</button>
+  <button class="nav-btn" onclick="showPage('about', this)">소개</button>
+</nav>
 
-    <div class="search-row">
-      <input type="text" id="searchInput" placeholder="검색어를 입력하세요..." />
-      <button class="btn-search" onclick="doSearch()">검색</button>
-    </div>
+<!-- 소개 페이지 -->
+<div class="page" id="page-about">
+  <div class="about-section">
+    <div class="about-text">나의 삶에 깊이 파고드는 순간, 집의 공간인 부엌이 있었다. 이건, 가격 매겨지지 않는 것들에 가까이 가는 것이다. 조금 더, 조금 더 그 안의 것들은 익어가고, 설익은 밥을 살리는 법도 장착했다. 이곳은 우리가 만나는 곳이고, 같이 나누는 말이 필요 없는 시간이고 이야기다.
 
-    <div class="filter-label">계절</div>
-    <div class="btn-row" id="seasonRow">
-      <button class="filter-btn active" data-season="전체" onclick="filterSeason('전체', this)">전체</button>
-      <button class="filter-btn" data-season="봄" onclick="filterSeason('봄', this)">🌸 봄</button>
-      <button class="filter-btn" data-season="여름" onclick="filterSeason('여름', this)">🌿 여름</button>
-      <button class="filter-btn" data-season="가을" onclick="filterSeason('가을', this)">🍂 가을</button>
-      <button class="filter-btn" data-season="겨울" onclick="filterSeason('겨울', this)">❄️ 겨울</button>
-    </div>
+전문 주방은 공적이고 부엌은 굉장히 사적이다. 내밀한 너와 나, 식구들이 만든 우리들만의 문화가 드러나는 곳이 부엌이다. 그렇게 <span class="highlight">'부엌 경관'</span>이라는 말을 떠올렸다.
 
-    <div class="filter-label">카테고리</div>
-    <div class="btn-row" id="categoryRow">
-      <button class="filter-btn active" data-cat="전체" onclick="filterCategory('전체', this)">전체</button>
-      <button class="filter-btn" data-cat="🍳 요리/레시피" onclick="filterCategory('🍳 요리/레시피', this)">🍳 요리/레시피</button>
-      <button class="filter-btn" data-cat="🏠 집/공간" onclick="filterCategory('🏠 집/공간', this)">🏠 집/공간</button>
-      <button class="filter-btn" data-cat="🌿 동네/생활" onclick="filterCategory('🌿 동네/생활', this)">🌿 동네/생활</button>
-      <button class="filter-btn" data-cat="✈️ 여행" onclick="filterCategory('✈️ 여행', this)">✈️ 여행</button>
-      <button class="filter-btn" data-cat="👨‍👩‍👧 가족/사람" onclick="filterCategory('👨‍👩‍👧 가족/사람', this)">👨‍👩‍👧 가족/사람</button>
-      <button class="filter-btn" data-cat="💭 생각/에세이" onclick="filterCategory('💭 생각/에세이', this)">💭 생각/에세이</button>
-    </div>
-
+우리는 각자의 중요한 일들을 향하고, 하루 세 번씩 부엌 옆 식탁에서 만난다. 간단한 커피포트만을 가지고 있던, 몇 대의 냉장고를 가지고 있던 그곳의 기능은 유지되며 꾸준하게 운영하는 몫은 사람에게 달렸다. 그래서 그것들이 쌓여 아무렇지 않게, 편안한 생태가 되는, 그 부분이 중요한 것 같다. 그 부엌은 집의 어딘가에 위치하고, 그곳은 중요한 장소가 된다.</div>
+    <div class="about-divider"></div>
+    <div class="about-text">이 페이지들은 때로는 불평불만이고, 서정적이기도 했다가 전문적이기도 했다. 이건 집을 관찰하는 나의 여러 가지 입장을 그때그때 자연스럽게 펼친 결과이며, 이 글들은 하나의 작은 프롤로그로, 방향을 가지고 앞으로 나아가기를 바란다.</div>
+    <div class="about-divider"></div>
+    <div class="about-sign">bluetable · 고양이삼거리</div>
   </div>
 </div>
 
-<div class="timeline-wrap">
-  <div class="timeline-inner">
-    <div class="filter-label">인생의 시기로 찾기</div>
-    <div class="slider-row">
-      <span style="font-size:0.75rem;color:var(--muted)">2020</span>
-      <input type="range" id="yearStart" min="2020" max="2026" value="2020" oninput="updateTimeline()">
-      <span class="year-display" id="yearDisplay">2020 — 2026</span>
-      <input type="range" id="yearEnd" min="2020" max="2026" value="2026" oninput="updateTimeline()">
-      <span style="font-size:0.75rem;color:var(--muted)">2026</span>
+<!-- 글 모음 페이지 -->
+<div class="page active" id="page-archive">
+
+  <div class="filter-wrap">
+    <div class="filter-inner">
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요..." />
+        <button class="btn-search" onclick="doSearch()">검색</button>
+      </div>
+
+      <div class="filter-label">계절</div>
+      <div class="btn-row" id="seasonRow">
+        <button class="filter-btn active" data-season="전체" onclick="filterSeason('전체', this)">전체</button>
+        <button class="filter-btn" data-season="봄" onclick="filterSeason('봄', this)">🌸 봄</button>
+        <button class="filter-btn" data-season="여름" onclick="filterSeason('여름', this)">🌿 여름</button>
+        <button class="filter-btn" data-season="가을" onclick="filterSeason('가을', this)">🍂 가을</button>
+        <button class="filter-btn" data-season="겨울" onclick="filterSeason('겨울', this)">❄️ 겨울</button>
+      </div>
+
+      <div class="filter-label">카테고리</div>
+      <div class="btn-row" id="categoryRow">
+        <button class="filter-btn active" data-cat="전체" onclick="filterCategory('전체', this)">전체</button>
+        <button class="filter-btn" data-cat="🍳 요리/레시피" onclick="filterCategory('🍳 요리/레시피', this)">🍳 요리/레시피</button>
+        <button class="filter-btn" data-cat="🏠 집/공간" onclick="filterCategory('🏠 집/공간', this)">🏠 집/공간</button>
+        <button class="filter-btn" data-cat="🌿 동네/생활" onclick="filterCategory('🌿 동네/생활', this)">🌿 동네/생활</button>
+        <button class="filter-btn" data-cat="✈️ 여행" onclick="filterCategory('✈️ 여행', this)">✈️ 여행</button>
+        <button class="filter-btn" data-cat="👨‍👩‍👧 가족/사람" onclick="filterCategory('👨‍👩‍👧 가족/사람', this)">👨‍👩‍👧 가족/사람</button>
+        <button class="filter-btn" data-cat="💭 생각/에세이" onclick="filterCategory('💭 생각/에세이', this)">💭 생각/에세이</button>
+      </div>
     </div>
   </div>
+
+  <div class="timeline-wrap">
+    <div class="timeline-inner">
+      <div class="filter-label">인생의 시기로 찾기</div>
+      <div class="slider-row">
+        <span style="font-size:0.75rem;color:var(--muted)">2020</span>
+        <input type="range" id="yearStart" min="2020" max="2026" value="2020" oninput="updateTimeline()">
+        <span class="year-display" id="yearDisplay">2020 — 2026</span>
+        <input type="range" id="yearEnd" min="2020" max="2026" value="2026" oninput="updateTimeline()">
+        <span style="font-size:0.75rem;color:var(--muted)">2026</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <span id="statsText">글을 불러오는 중...</span>
+  </div>
+
+  <div class="cards-wrap" id="cardsWrap">
+    <div class="loading">글을 불러오는 중...</div>
+  </div>
+
 </div>
 
-<div class="stats-bar">
-  <span id="statsText">글을 불러오는 중...</span>
-</div>
-
-<div class="cards-wrap" id="cardsWrap">
-  <div class="loading">글을 불러오는 중...</div>
-</div>
-
+<!-- Modal -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-header">
@@ -542,10 +631,18 @@ function renderCards(data) {
       <p>${d.summary || ''}</p>
       ${d.keywords && d.keywords.length > 0 ? `
         <div class="card-keywords">
-          ${d.keywords.map(k => `<span class="keyword-tag">${k}</span>`).join('')}
+          ${d.keywords.map(k => `<span class="keyword-tag" onclick="searchKeyword(event,'${k}')">${k}</span>`).join('')}
         </div>` : ''}
     </div>`;
   }).join('');
+}
+
+function searchKeyword(e, keyword) {
+  e.stopPropagation();
+  document.getElementById('searchInput').value = keyword;
+  currentSearch = keyword;
+  applyFilters();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function filterSeason(season, btn) {
@@ -591,7 +688,9 @@ function openModal(idx) {
   document.getElementById('btnEn').classList.remove('active');
   document.getElementById('translateNotice').style.display = 'none';
   document.getElementById('modalKeywords').innerHTML =
-    (currentArticle.keywords || []).map(k => `<span class="keyword-tag">${k}</span>`).join('');
+    (currentArticle.keywords || []).map(k =>
+      `<span class="keyword-tag" onclick="searchKeyword(event,'${k}')">${k}</span>`
+    ).join('');
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -610,6 +709,13 @@ function closeModal(e) {
 function closeModalBtn() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function showPage(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 </body>
