@@ -12,102 +12,102 @@
       {
         "id": "요리법",
         "label": "요리법",
-        "color": "#7F77DD"
+        "color": "#1A7015"
       },
       {
         "id": "기억",
         "label": "기억",
-        "color": "#1D9E75"
+        "color": "#4A3FA0"
       },
       {
         "id": "도구",
         "label": "도구",
-        "color": "#D4537E"
+        "color": "#6E6840"
       },
       {
         "id": "장소",
         "label": "장소",
-        "color": "#D85A30"
+        "color": "#7A2800"
       },
       {
         "id": "여행",
         "label": "여행",
-        "color": "#BA7517"
+        "color": "#9E3E0E"
       },
       {
         "id": "부엌",
         "label": "부엌",
-        "color": "#04c6f6"
+        "color": "#F0CDB0"
       },
       {
         "id": "집",
         "label": "집",
-        "color": "#0491b4"
+        "color": "#CC8255"
       },
       {
         "id": "동네",
         "label": "동네",
-        "color": "#06d08d"
+        "color": "#B85E2E"
       },
       {
         "id": "식탁",
         "label": "식탁",
-        "color": "#78cdf7"
+        "color": "#C8C4A8"
       },
       {
         "id": "설계",
         "label": "설계",
-        "color": "#708090"
+        "color": "#9E9870"
       },
       {
         "id": "소설",
         "label": "소설",
-        "color": "#d756f0"
+        "color": "#6B5FB8"
       },
       {
         "id": "일화",
         "label": "일화",
-        "color": "#6a2d76"
+        "color": "#8B7EC8"
       },
       {
         "id": "시장",
         "label": "시장",
-        "color": "#D85A30"
+        "color": "#E0A882"
       },
       {
         "id": "경관",
         "label": "경관",
-        "color": "#31d88a"
+        "color": "#A89DD8"
       },
       {
         "id": "단어",
         "label": "단어",
-        "color": "#f056eb"
+        "color": "#C4B5E8"
       },
       {
         "id": "재료",
         "label": "재료",
-        "color": "#f5f0f5"
+        "color": "#72B068"
       },
       {
         "id": "방법",
         "label": "방법",
-        "color": "#c6bec6"
+        "color": "#519E4A"
       },
       {
         "id": "멸치",
         "label": "멸치",
-        "color": "#9cc49f"
+        "color": "#B8D4B0"
       },
       {
         "id": "텃밭",
         "label": "텃밭",
-        "color": "#03ce11"
+        "color": "#348C2E"
       },
       {
         "id": "파스타",
         "label": "파스타",
-        "color": "#a77ba1"
+        "color": "#94C28A"
       }
     ]
   },
